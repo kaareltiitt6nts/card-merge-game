@@ -1,38 +1,44 @@
-import { useState, useContext, createContext } from 'react'
-import './App.css'
-import GameContainer from "./Components/GameContainer"
-import PlayerDataContext from './Data/PlayerDataContext'
-
+import { useState, useContext, createContext } from "react";
+import "./App.css";
+import GameContainer from "./Components/GameContainer";
+import PlayerDataContext from "./Data/PlayerDataContext";
 
 function App() {
+  // selle abil valib, millised v22rtused RankSuitCount'is kuvab
+  // kas peaks v2ltima useState() kasutamist?? 
+  const [selectedRank, setSelectedRank] = useState("2");
+
   const data = {
-    "id":0,
-    "key":"asd",
-    "name":"",
-    "cards":{
-      "two":{"heart":0,"diamond":0,"spade":0,"club":0},
-      "three":{"heart":0,"diamond":0,"spade":0,"club":0},
-      "four":{"heart":0,"diamond":0,"spade":0,"club":0},
-      "five":{"heart":0,"diamond":0,"spade":0,"club":0},
-      "six":{"heart":0,"diamond":0,"spade":0,"club":0},
-      "seven":{"heart":0,"diamond":0,"spade":0,"club":0},
-      "eight":{"heart":0,"diamond":0,"spade":0,"club":0},
-      "nine":{"heart":0,"diamond":0,"spade":0,"club":0},
-      "ten":{"heart":0,"diamond":0,"spade":0,"club":0},
-      "jack":{"heart":0,"diamond":0,"spade":0,"club":0},
-      "queen":{"heart":0,"diamond":0,"spade":0,"club":0},
-      "king":{"heart":0,"diamond":0,"spade":0,"club":0},
-      "ace":{"heart":0,"diamond":0,"spade":0,"club":0}
-    }
-  }
+    id: 0,
+    key: "asd",
+    name: "",
+    cards: {
+      2: { "♥": 0, "♦": 0, "♠": 0, "♣": 0 },
+      3: { "♥": 0, "♦": 0, "♠": 0, "♣": 0 },
+      4: { "♥": 0, "♦": 0, "♠": 0, "♣": 0 },
+      5: { "♥": 0, "♦": 0, "♠": 0, "♣": 0 },
+      6: { "♥": 0, "♦": 0, "♠": 0, "♣": 0 },
+      7: { "♥": 0, "♦": 0, "♠": 0, "♣": 0 },
+      8: { "♥": 0, "♦": 0, "♠": 0, "♣": 0 },
+      9: { "♥": 0, "♦": 0, "♠": 0, "♣": 0 },
+      T: { "♥": 0, "♦": 0, "♠": 0, "♣": 0 },
+      J: { "♥": 0, "♦": 0, "♠": 0, "♣": 0 },
+      Q: { "♥": 0, "♦": 0, "♠": 0, "♣": 0 },
+      K: { "♥": 0, "♦": 0, "♠": 0, "♣": 0 },
+      A: { "♥": 0, "♦": 0, "♠": 0, "♣": 0 },
+    },
+  };
 
   return (
     <>
       <PlayerDataContext.Provider value={data}>
-        <GameContainer/>
+        <GameContainer
+          selectedRank={selectedRank}
+          setSelectedRank={setSelectedRank}
+        />
       </PlayerDataContext.Provider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
