@@ -1,18 +1,28 @@
 import React, { useContext } from "react";
-import PlayerDataContext from "../Data/PlayerDataContext";
 import Button from "./Button";
+import PlayerDataContext from "../Data/PlayerDataContext";
 
-const RankArea = () => {
+const RankArea = ({ setSelectedRank }) => {
   const playerData = useContext(PlayerDataContext);
-  const ranks = []
+  const ranks = Object.keys(playerData.cards);
+
+  /*   const ranks = []
   for (const rank in playerData.cards) {
     ranks.push(rank);
-  }
-  console.log(ranks)
+  } */
+  console.log(ranks);
   return (
     <>
       {ranks.map((rank) => (
-        <Button key={rank}>{rank}</Button>
+        <Button
+          key={rank}
+          onClick={() => {
+            console.log("clicked", rank);
+            setSelectedRank(rank);
+          }}
+        >
+          {rank}
+        </Button>
       ))}
     </>
   );

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function HighScore() {
+const HighScore = () => {
   return (
     <div>HighScore</div>
   )

@@ -1,12 +1,14 @@
-import React from 'react'
-//ala kus on merge ja get nupud
-function MergeGet() {
+import React from "react";
+import Button from "./Button";
+
+// //ala kus on merge ja get nupud
+const MergeGet = () => {
   return (
     <div>
-        <Button></Button>
-        <Button></Button>
+      <Button>Merge</Button>
+      <Button>Get</Button>
     </div>
-  )
-}
+  );
+};
 
-export default MergeGet
+export default MergeGet;

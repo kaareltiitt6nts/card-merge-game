@@ -1,12 +1,14 @@
 import React from 'react'
 import RankSuitCount from "./RankSuitCount"
+import Button from './Button'
 
 // alumine osa mis näitab järgmise ranki kogunenud kaarte
-function ResultArea() {
+const ResultArea = () => {
+
 
   return (
     <div>
-        {}
+      <Button></Button>
     </div>
   )
 }
