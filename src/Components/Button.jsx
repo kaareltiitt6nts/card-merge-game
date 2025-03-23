@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Button = (props) => {
+const Button = ({children}) => {
   return (
-    <button>Bsdautton</button>
+    <button className='border-solid border-2 p-2 m-2 hover:bg-sky-700'>{children}</button>
   )
 }
 

@@ -8,8 +8,7 @@ function GameContainer() {
   return (
     <div>
         <RankArea />
-        <Button></Button>
-        {playerData.toString()}
+        
     </div> 
   )
 }
