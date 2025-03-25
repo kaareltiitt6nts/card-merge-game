@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import PlayerDataContext from "../Data/PlayerDataContext";
-import Button from "./Button";
+import RankSuitDisplay from "./RankSuitDisplay";
 
 const RankSuitCount = ({ selectedRank }) => {
   const playerData = useContext(PlayerDataContext);
@@ -16,14 +16,11 @@ const RankSuitCount = ({ selectedRank }) => {
     .flat();
 
   const filteredCards = cardData.filter((card) => card.rank === selectedRank);
+  
   return (
-    <div className="flex justify-center p-10 ">
+    <div className="flex justify-center p-10">
       {filteredCards.map((card, index) => (
-        <div key={index} className="border-2 p-5 m-3 bg-white rounded-xl">
-          <span className="text-2xl">{card.suit}</span>
-          <span className="ml-2 text-xl">{card.rank}</span>
-          <span className="ml-2 text-sm">x{card.count}</span>
-        </div>
+        <RankSuitDisplay rank={card.rank} suit={card.suit} count={card.count} />
       ))}
     </div>
   );
