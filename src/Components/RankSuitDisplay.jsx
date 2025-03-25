@@ -4,8 +4,15 @@ const RankSuitDisplay = (props) => {
   const {rank, suit, count} = props
   const [translateClass, setTranslateClass] = useState("")
   const lastCount = useRef(count)
+  const lastRank = useRef(rank)
 
   useEffect(() => {
+    if (rank !== lastRank.current) {
+      lastRank.current = rank
+      lastCount.current = count
+      return
+    }
+
     if (count > lastCount.current) {
       setTranslateClass("-translate-y-3")
     }
