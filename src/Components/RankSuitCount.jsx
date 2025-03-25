@@ -17,13 +17,13 @@ const RankSuitCount = ({ selectedRank }) => {
 
   const filteredCards = cardData.filter((card) => card.rank === selectedRank);
   return (
-    <div>
+    <div className="flex justify-center p-10 ">
       {filteredCards.map((card, index) => (
-        <Button key={index}>
+        <div key={index} className="border-2 p-5 m-3 bg-white rounded-xl">
           <span className="text-2xl">{card.suit}</span>
           <span className="ml-2 text-xl">{card.rank}</span>
           <span className="ml-2 text-sm">x{card.count}</span>
-        </Button>
+        </div>
       ))}
     </div>
   );

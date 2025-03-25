@@ -9,10 +9,10 @@ function GameContainer({selectedRank, setSelectedRank, showNextRank, setShownext
   const ranks = Object.keys(playerData.cards);
   
   return (
-    <div>
+    <div className='border-10 rounded-full border-y-green-800 border-green-950 p-30 bg-green-600 '>
         <RankArea setSelectedRank={setSelectedRank} setShownextRank={setShownextRank} />
         <RankSuitCount selectedRank={selectedRank} />
-        <MergeGet></MergeGet>
+        <MergeGet selectedRank={selectedRank} ></MergeGet>
         <RankSuitCount selectedRank={ranks[showNextRank]} />
         
     </div> 

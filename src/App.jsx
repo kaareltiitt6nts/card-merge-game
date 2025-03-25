@@ -8,7 +8,7 @@ function App() {
   // kas peaks v2ltima useState() kasutamist??
   const [selectedRank, setSelectedRank] = useState("2");
   //see määrab kui lehele lähed, millest nextrank alustab
-  const [showNextRank, setShownextRank] = useState("3");
+  const [showNextRank, setShownextRank] = useState("1");
   //panin usestate'i, et jälgida muutusi ekraanil
   const [data,setData] = useState({
     id: 0,
@@ -58,13 +58,15 @@ function App() {
 
   return (
     <>
-      <PlayerDataContext.Provider value={{...data, updatePlayerData}}>
+      <PlayerDataContext.Provider value={{...data, updatePlayerData}} >
+        <div className="flex justify-center items-center w-screen h-screen">
         <GameContainer
           selectedRank={selectedRank}
           setSelectedRank={setSelectedRank}
           showNextRank={showNextRank}
           setShownextRank={setShownextRank}
         />
+        </div>
       </PlayerDataContext.Provider>
     </>
   );
