@@ -3,7 +3,7 @@ import React from "react";
 const Button = ({ children, onClick }) => {
   return (
     <button
-      className="border-solid border-2 p-2 m-2 hover:bg-sky-700"
+      className="border-solid bg-neutral-200 border-2 rounded-md p-3 m-2 w-20 h-15 hover:bg-sky-100 "
       onClick={onClick}
     >
       {children}
