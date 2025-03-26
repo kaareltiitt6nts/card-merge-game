@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import PlayerDataContext from "../Data/PlayerDataContext";
 import RankSuitDisplay from "./RankSuitDisplay";
+import { ranksToValue, suitToIcon } from "../Utils/Utils";
 
 const RankSuitCount = ({ selectedRank }) => {
   const {playerData, dispatchGameEvent} = useContext(PlayerDataContext);
@@ -20,7 +21,7 @@ const RankSuitCount = ({ selectedRank }) => {
   return (
     <div className="flex justify-center p-10">
       {filteredCards.map((card, index) => (
-        <RankSuitDisplay rank={card.rank} suit={card.suit} count={card.count} />
+        <RankSuitDisplay rank={ranksToValue(card.rank)} suit={suitToIcon(card.suit)} count={card.count} />
       ))}
     </div>
   );
