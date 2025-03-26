@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useReducer } from 'react'
 
 const RankSuitDisplay = (props) => {
   const {rank, suit, count} = props
@@ -33,7 +33,7 @@ const RankSuitDisplay = (props) => {
   }, [count])
 
   return (
-    <div className={`border-2 p-5 m-3 ${count > 0 ? "bg-white" : "bg-red-200"} rounded-xl transition-transform duration-100 ease-linear ${translateClass}`}>
+    <div className={`border-2 min-w-12 p-3 m-3 ${count > 0 ? "bg-white" : "bg-red-200"} rounded-xl transition-transform duration-100 ease-linear ${translateClass}`}>
       <span className="text-2xl">{rank}</span>
       <span className="ml-2 text-xl">{suit}</span>
       <span className="ml-2 text-sm">x{count}</span>
