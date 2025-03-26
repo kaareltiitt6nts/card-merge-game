@@ -3,7 +3,7 @@ import PlayerDataContext from "../Data/PlayerDataContext";
 import RankSuitDisplay from "./RankSuitDisplay";
 
 const RankSuitCount = ({ selectedRank }) => {
-  const playerData = useContext(PlayerDataContext);
+  const {playerData, dispatchGameEvent} = useContext(PlayerDataContext);
 
   const cardData = Object.keys(playerData.cards)
     .map((cardRank) => {
