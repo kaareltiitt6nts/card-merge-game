@@ -5,6 +5,10 @@ const app = express()
 const PORT = 5174
 
 app.use(express.json())
+app.use((req, res, next) => {
+  res.set("Content-Type", "application/json")
+  next()
+})
 app.use("/api", apiRouter)
 
 app.listen(PORT, () => {
