@@ -1,12 +1,12 @@
 import fs from "fs/promises"
-import { parse } from "path"
+import path from "path"
+const dataPath = "./backend/data/"
 
 export const readFile = async (filePath) => {
   try {
     const rawData = await fs.readFile(filePath, "utf-8")
     return rawData
   } catch (error) {
-    console.log(error)
     return undefined
   }
 }
@@ -17,7 +17,6 @@ export const parseRawToJson = async (rawData) => {
     return parsedData
   } catch (error) {
     console.log(error)
-    return undefined
   }
 }
 
@@ -27,7 +26,27 @@ export const writeFile = async (data, filePath) => {
     return true
   } catch (error) {
     console.log(error)
-    return false
+  }
+}
+
+export const savePlayerData = async (key, data) => {
+  try {
+    const filePath = path.join(dataPath, `${key}.json`)
+    const playerDataRaw = await readFile(filePath)
+
+    if (playerDataRaw) {
+      const success = await writeFile(JSON.stringify(data), filePath)
+    }
+    else {
+      const file = fs.appendFile(filePath, JSON.stringify(data), (err) => {
+        if (err) throw err
+      })
+    }
+
+    return [true, data]
+  } catch (error) {
+    console.log(error)
+    return [false, undefined]
   }
 }
 
@@ -38,15 +57,15 @@ export const parseFile = async (filePath) => {
     return data
   } catch (error) {
     console.log(error)
-    return undefined
   }
 }
 
-export const getPlayerByKey = async (playerKey) => {
+export const findPlayerData = async (key) => {
   try {
-    
+    const playerData = await parseFile(path.join(dataPath, `${key}.json`))
+
+    return playerData
   } catch (error) {
     console.log(error)
-    return undefined
   }
 }
