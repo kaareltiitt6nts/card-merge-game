@@ -6,6 +6,7 @@ const HighScore = () => {
   const { playerData } = useContext(PlayerDataContext);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [playerName, setPlayerName] = useState(playerData.name || "");
+  const [playerKey, setPlayerKey] = useState("")
 
   const handleSave = async () => {
     if (!playerName.trim()) return;
@@ -16,7 +17,7 @@ const HighScore = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ key: "test", data: { ...playerData, name: playerName } }),
+      body: JSON.stringify({ key: playerKey, data: { ...playerData, name: playerName } }),
     });
 
     if (response.ok) {
@@ -52,7 +53,7 @@ const HighScore = () => {
       </button>
       
       {showLeaderboard && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center">
+        <div className="fixed inset-0 bg-neutral-950/75 flex justify-center items-center">
           <div className="bg-white p-5 rounded-lg w-96">
             <h2 className="text-xl font-bold mb-3">Top 10 Leaderboard</h2>
             <ul>
@@ -71,13 +72,22 @@ const HighScore = () => {
       )}
       
       <div className="mt-4">
-        <input 
-          type="text" 
-          value={playerName} 
-          onChange={(e) => setPlayerName(e.target.value)} 
-          placeholder="Enter name"
-          className="border p-2 rounded"
-        />
+        <div className="flex flex-row gap-2 justify-center mb-1">
+          <input 
+            type="text" 
+            value={playerKey} 
+            onChange={(e) => setPlayerKey(e.target.value)} 
+            placeholder="Enter key"
+            className="border p-2 rounded bg-white"
+          />
+          <input 
+            type="text" 
+            value={playerName} 
+            onChange={(e) => setPlayerName(e.target.value)} 
+            placeholder="Enter name"
+            className="border p-2 rounded bg-white"
+          />
+        </div>
         <button className="ml-2 px-4 py-2 bg-green-500 text-white rounded" onClick={handleSave}>
           Save
         </button>
