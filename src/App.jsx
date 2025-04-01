@@ -4,8 +4,8 @@ import PlayerDataContext from "./Data/PlayerDataContext";
 import RankArea from "./Components/RankArea";
 import RankSuitCount from "./Components/RankSuitCount";
 import MergeGet from "./Components/MergeGet";
-import {getRandomSuit, getNextRank,suits} from "./Utils/Utils"
-
+import { getRandomSuit, getNextRank, suits } from "./Utils/Utils";
+import HighScore from "./Components/HighScore";
 
 const actionTypes = {
   INPUT_GET: "INPUT_GET",
@@ -78,10 +78,13 @@ function App() {
       <PlayerDataContext.Provider value={{ playerData, dispatchGameEvent }}>
         <div className="flex justify-center items-center w-screen h-screen">
           <div className="border-10 rounded-full border-y-green-800 border-green-950 p-30 bg-green-600 ">
+            <HighScore />
             <RankArea />
             <RankSuitCount selectedRank={playerData.selectedRank} />
             <MergeGet />
-            <RankSuitCount selectedRank={getNextRank(playerData.selectedRank)} />
+            <RankSuitCount
+              selectedRank={getNextRank(playerData.selectedRank)}
+            />
           </div>
         </div>
       </PlayerDataContext.Provider>

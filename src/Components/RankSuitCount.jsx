@@ -21,7 +21,7 @@ const RankSuitCount = ({ selectedRank }) => {
   return (
     <div className="flex justify-center p-10">
       {filteredCards.map((card, index) => (
-        <RankSuitDisplay rank={ranksToValue(card.rank)} suit={suitToIcon(card.suit)} count={card.count} />
+        <RankSuitDisplay key={index} rank={ranksToValue(card.rank)} suit={suitToIcon(card.suit)} count={card.count} />
       ))}
     </div>
   );
