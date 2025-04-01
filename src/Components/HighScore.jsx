@@ -22,6 +22,7 @@ const HighScore = () => {
 
     if (response.ok) {
       console.log("Data saved successfully");
+      localStorage.setItem("playerKey", playerKey)
     } else {
       console.error("Failed to save data");
     }

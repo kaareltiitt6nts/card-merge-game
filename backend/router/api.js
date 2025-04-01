@@ -5,7 +5,7 @@ const apiRouter = express.Router()
 
 apiRouter.get("/get-player-data/", async (req, res) => {
   try {
-    const {key} = req.body
+    const {key} = req.query
 
     const playerData = await findPlayerData(key)
 

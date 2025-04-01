@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import "./App.css";
 import PlayerDataContext from "./Data/PlayerDataContext";
 import RankArea from "./Components/RankArea";
@@ -11,6 +11,7 @@ const actionTypes = {
   INPUT_GET: "INPUT_GET",
   INPUT_MERGE: "INPUT_MERGE",
   INPUT_SET_RANK: "INPUT_SET_RANK",
+  ACTION_DATA_LOADED: "ACTION_DATA_LOADED"
 };
 
 const gameReducer = (state, action) => {
@@ -41,12 +42,14 @@ const gameReducer = (state, action) => {
     case actionTypes.INPUT_SET_RANK:
       clone.selectedRank = action.rank;
       return clone;
+    case actionTypes.ACTION_DATA_LOADED:
+      return action.data
     default:
       return clone;
   }
 };
 
-const mockPlayerData = {
+const defaultPlayerData = {
   id: 0,
   key: "asd",
   name: "",
@@ -65,16 +68,30 @@ const mockPlayerData = {
     king: { heart: 0, diamond: 0, spade: 0, club: 0 },
     ace: { heart: 0, diamond: 0, spade: 0, club: 0 },
   },
+  selectedRank: "two"
 };
 
 function App() {
-  const [playerData, dispatchGameEvent] = useReducer(gameReducer, {
-    ...mockPlayerData,
-    selectedRank: "two",
-  });
+  const [playerData, dispatchGameEvent] = useReducer(gameReducer, defaultPlayerData)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:5173/api/get-player-data?key=test`)
+        const data = await response.json()
+
+        dispatchGameEvent({type: actionTypes.ACTION_DATA_LOADED, data: data || defaultPlayerData})
+      } catch (error) {
+        console.error("Failed to fetch data" + error)
+      }
+    }
+
+    fetchData()
+  }, [])
 
   return (
     <>
+      {playerData === null ? <p className="text-white">Loading...</p> :
       <PlayerDataContext.Provider value={{ playerData, dispatchGameEvent }}>
         <div className="flex justify-center items-center w-screen h-screen">
           <div className="border-10 rounded-full border-y-green-800 border-green-950 p-30 bg-green-600 ">
@@ -88,6 +105,7 @@ function App() {
           </div>
         </div>
       </PlayerDataContext.Provider>
+      }
     </>
   );
 }
