@@ -76,11 +76,22 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await fetch(`http://localhost:5173/api/get-player-data?key=test`)
-        const data = await response.json()
+      const playerKey = localStorage.getItem("playerKey")
+      if (!playerKey) {
+        dispatchGameEvent({type: actionTypes.ACTION_DATA_LOADED, data: defaultPlayerData})
+        return
+      }
 
-        dispatchGameEvent({type: actionTypes.ACTION_DATA_LOADED, data: data || defaultPlayerData})
+      try {
+        const response = await fetch(`/api/get-player-data?key=${playerKey}`)
+
+        if (response.status === 404) {
+          dispatchGameEvent({type: actionTypes.ACTION_DATA_LOADED, data: defaultPlayerData})
+        }
+        else {
+          const data = await response.json()
+          dispatchGameEvent({type: actionTypes.ACTION_DATA_LOADED, data: data})
+        }
       } catch (error) {
         console.error("Failed to fetch data" + error)
       }
