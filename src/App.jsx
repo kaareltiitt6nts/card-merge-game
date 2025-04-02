@@ -6,7 +6,6 @@ import RankSuitCount from "./Components/UI/Game/RankSuitCount";
 import RankSuitCountBig from "./Components/UI/Game/RankSuitCountBig"
 import MergeGet from "./Components/UI/Game/MergeGet";
 import { getRandomSuit, getNextRank, suits } from "./Utils/Utils";
-import HighScore from "./Components/UI/Game/HighScore";
 import Navbar from "./Components/Nav/Navbar";
 
 const actionTypes = {
