@@ -1,6 +1,6 @@
 import React, { useCallback, useContext } from "react";
-import Button from "./Button";
-import PlayerDataContext from "../Data/PlayerDataContext";
+import Button from "../Button";
+import PlayerDataContext from "../../../Data/PlayerDataContext";
 
 // //ala kus on merge ja get nupud
 const MergeGet = ({ selectedRank }) => {
@@ -15,7 +15,7 @@ const MergeGet = ({ selectedRank }) => {
   }, [dispatchGameEvent])
 
   return (
-    <div className="flex justify-center ">
+    <div className="flex flex-row gap-1">
       <Button onClick={handleMerge}>Merge</Button>
       <Button onClick={handleGet}>Get</Button>
     </div>

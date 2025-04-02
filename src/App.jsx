@@ -1,11 +1,13 @@
 import { useEffect, useReducer, useState } from "react";
 import "./App.css";
 import PlayerDataContext from "./Data/PlayerDataContext";
-import RankArea from "./Components/RankArea";
-import RankSuitCount from "./Components/RankSuitCount";
-import MergeGet from "./Components/MergeGet";
+import RankArea from "./Components/UI/Game/RankArea";
+import RankSuitCount from "./Components/UI/Game/RankSuitCount";
+import RankSuitCountBig from "./Components/UI/Game/RankSuitCountBig"
+import MergeGet from "./Components/UI/Game/MergeGet";
 import { getRandomSuit, getNextRank, suits } from "./Utils/Utils";
-import HighScore from "./Components/HighScore";
+import HighScore from "./Components/UI/Game/HighScore";
+import Navbar from "./Components/Nav/Navbar";
 
 const actionTypes = {
   INPUT_GET: "INPUT_GET",
@@ -80,7 +82,13 @@ function App() {
         const response = await fetch(`http://localhost:5173/api/get-player-data?key=test`)
         const data = await response.json()
 
-        dispatchGameEvent({type: actionTypes.ACTION_DATA_LOADED, data: data || defaultPlayerData})
+        if (response.status === 404) { 
+          dispatchGameEvent({type: actionTypes.ACTION_DATA_LOADED, data: defaultPlayerData})
+          localStorage.setItem("playerKey", "")
+        }
+        else {
+          dispatchGameEvent({type: actionTypes.ACTION_DATA_LOADED, data: data})
+        }
       } catch (error) {
         console.error("Failed to fetch data" + error)
       }
@@ -93,15 +101,16 @@ function App() {
     <>
       {playerData === null ? <p className="text-white">Loading...</p> :
       <PlayerDataContext.Provider value={{ playerData, dispatchGameEvent }}>
-        <div className="flex justify-center items-center w-screen h-screen">
-          <div className="border-10 rounded-full border-y-green-800 border-green-950 p-30 bg-green-600 ">
-            <HighScore />
-            <RankArea />
+        <Navbar />
+        {/* <HighScore /> */}
+        <RankArea />
+        <div className="h-screen flex justify-center items-center">
+          <div className="flex flex-col items-center gap-1 -translate-y-30 md:-translate-y-15">
             <RankSuitCount selectedRank={playerData.selectedRank} />
             <MergeGet />
-            <RankSuitCount
-              selectedRank={getNextRank(playerData.selectedRank)}
-            />
+          </div>
+          <div className="absolute w-full bottom-0 translate-y-2 flex justify-center">
+            <RankSuitCountBig selectedRank={getNextRank(playerData.selectedRank)} />
           </div>
         </div>
       </PlayerDataContext.Provider>

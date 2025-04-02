@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import PlayerDataContext from "../Data/PlayerDataContext";
-import RankSuitDisplay from "./RankSuitDisplay";
-import { ranksToValue, suitToIcon } from "../Utils/Utils";
+import PlayerDataContext from "../../../Data/PlayerDataContext";
+import RankSuitItemBig from "./RankSuitItemBig";
+import { ranksToValue, suitToIcon } from "../../../Utils/Utils";
 
 const RankSuitCount = ({ selectedRank }) => {
   const {playerData, dispatchGameEvent} = useContext(PlayerDataContext);
@@ -19,12 +19,12 @@ const RankSuitCount = ({ selectedRank }) => {
   const filteredCards = cardData.filter((card) => card.rank === selectedRank);
   
   return (
-    <div className="flex justify-center p-10">
+    <div className="relative w-fit grid grid-cols-2 gap-1 md:flex">
       {filteredCards.map((card, index) => (
-        <RankSuitDisplay key={index} rank={ranksToValue(card.rank)} suit={suitToIcon(card.suit)} count={card.count} />
+        <RankSuitItemBig key={index} rank={ranksToValue(card.rank)} suit={suitToIcon(card.suit)} count={card.count} />
       ))}
     </div>
-  );
-};
+  )
+}
 
 export default RankSuitCount;

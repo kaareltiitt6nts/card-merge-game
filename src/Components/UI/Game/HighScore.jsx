@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
-import PlayerDataContext from "../Data/PlayerDataContext";
-import { ranksToValue } from "../Utils/Utils";
+import PlayerDataContext from "../../../Data/PlayerDataContext";
+import { ranksToValue } from "../../../Utils/Utils";
 
 const HighScore = () => {
   const { playerData } = useContext(PlayerDataContext);

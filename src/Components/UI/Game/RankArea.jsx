@@ -1,26 +1,25 @@
 import React, { useContext } from "react";
-import Button from "./Button";
-import PlayerDataContext from "../Data/PlayerDataContext";
-import { ranksToValue } from "../Utils/Utils";
+import PlayerDataContext from "../../../Data/PlayerDataContext";
+import { ranksToValue } from "../../../Utils/Utils";
+import RankButton from "./RankButton";
 
 const RankArea = () => {
   const {playerData, dispatchGameEvent} = useContext(PlayerDataContext);
   const ranks = Object.keys(playerData.cards)
 
   return (
-    <>
-      <div className="border-1 border-neutral-100 rounded-xl">
+      <div className="absolute w-screen flex justify-center">
         {ranks.map((rank, index) => (
-          <Button 
+          <RankButton
             key={rank}
             onClick={() => dispatchGameEvent({type: "INPUT_SET_RANK", rank: rank})}
+            selected={playerData.selectedRank === rank}
           >
             {ranksToValue(rank)}
-          </Button>
+          </RankButton>
         ))}
       </div>
-    </>
-  );
-};
+  )
+}
 
 export default RankArea;

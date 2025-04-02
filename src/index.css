@@ -1,5 +1,5 @@
 @import "tailwindcss";
 
 body{
-    @apply bg-neutral-950 overflow-hidden
+    @apply bg-green-900 overflow-hidden
 }
