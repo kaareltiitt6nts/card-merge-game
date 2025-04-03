@@ -14,12 +14,14 @@ const Settings = () => {
         },
         body: JSON.stringify({
           key: key,
-          playerData: playerData
+          playerData: {...playerData, name: name ?? playerData.name}
         })
       })
 
       if (response.status === 201) {
+        localStorage.setItem("playerKey", key)
         alert("Data saved successfully!")
+        location.reload()
       }
       else {
         alert("Failed to save data.")
@@ -35,7 +37,7 @@ const Settings = () => {
 
       if (response.status === 200) {
         localStorage.setItem("playerKey", key)
-        alert("Data loaded successfully!") // XDDDDDDD
+        alert("Data loaded successfully!")
         location.reload()
       }
       else if (response.status === 404) {
