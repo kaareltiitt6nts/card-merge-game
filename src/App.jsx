@@ -52,8 +52,7 @@ const gameReducer = (state, action) => {
 
 const defaultPlayerData = {
   id: 0,
-  key: "asd",
-  name: "",
+  name: "Player",
   cards: {
     two: { heart: 0, diamond: 0, spade: 0, club: 0 },
     three: { heart: 0, diamond: 0, spade: 0, club: 0 },
