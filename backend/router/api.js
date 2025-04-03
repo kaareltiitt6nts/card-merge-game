@@ -23,9 +23,9 @@ apiRouter.get("/get-player-data/", async (req, res) => {
 
 apiRouter.post("/save-player-data/", async (req, res) => {
   try {
-    const {key, data} = req.body
+    const {key, playerData} = req.body
 
-    const [success, playerData] = await savePlayerData(key, data)
+    const success = await savePlayerData(key, playerData)
 
     if (success) {
       res.status(201).json(playerData)

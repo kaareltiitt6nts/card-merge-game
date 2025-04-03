@@ -9,11 +9,21 @@ const Settings = () => {
     try {
       const response = await fetch("/api/save-player-data", {
         method: "POST",
-        body: {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
           key: key,
-          data: playerData
-        }
+          playerData: playerData
+        })
       })
+
+      if (response.status === 201) {
+        alert("Data saved successfully!")
+      }
+      else {
+        alert("Failed to save data.")
+      }
     } catch (error) {
       alert("Failed to save data.")
     }
@@ -22,11 +32,10 @@ const Settings = () => {
   const handleLoad = async (key) => {
     try {
       const response = await fetch(`/api/get-player-data?key=${key}`)
-      const data = await response.json()
 
       if (response.status === 200) {
         localStorage.setItem("playerKey", key)
-        alert("Data loaded successfully!")
+        alert("Data loaded successfully!") // XDDDDDDD
         location.reload()
       }
       else if (response.status === 404) {

@@ -41,21 +41,14 @@ export const writeFile = async (data, filePath) => {
 export const savePlayerData = async (key, data) => {
   try {
     const filePath = path.join(dataPath, `${key}.json`)
-    const playerDataRaw = await readFile(filePath)
 
-    if (playerDataRaw) {
-      const success = await writeFile(JSON.stringify(data), filePath)
-    }
-    else {
-      const file = fs.appendFile(filePath, JSON.stringify(data), (err) => {
-        if (err) throw err
-      })
-    }
+    const json = JSON.stringify(data)
+    const success = await writeFile(json, filePath)
 
-    return [true, data]
+    return success
   } catch (error) {
     console.log(error)
-    return [false, undefined]
+    return false
   }
 }
 
