@@ -78,7 +78,13 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:5173/api/get-player-data?key=test`)
+        const playerKey = localStorage.getItem("playerKey")
+        if (playerKey === undefined || playerKey === "") {
+          dispatchGameEvent({type: actionTypes.ACTION_DATA_LOADED, data: defaultPlayerData})
+          return
+        } 
+
+        const response = await fetch(`http://localhost:5173/api/get-player-data?key=${playerKey}`)
         const data = await response.json()
 
         if (response.status === 404) { 
@@ -100,16 +106,17 @@ function App() {
     <>
       {playerData === null ? <p className="text-white">Loading...</p> :
       <PlayerDataContext.Provider value={{ playerData, dispatchGameEvent }}>
+        <div className="h-screen flex flex-col">
         <Navbar />
-        {/* <HighScore /> */}
-        <RankArea />
-        <div className="h-screen flex justify-center items-center">
-          <div className="flex flex-col items-center gap-1 -translate-y-30 md:-translate-y-15">
-            <RankSuitCount selectedRank={playerData.selectedRank} />
-            <MergeGet />
-          </div>
-          <div className="absolute w-full bottom-0 translate-y-2 flex justify-center">
-            <RankSuitCountBig selectedRank={getNextRank(playerData.selectedRank)} />
+          <div className="basis-full flex flex-col justify-between">
+            <RankArea />
+            <div className="flex flex-col items-center gap-1">
+              <RankSuitCount selectedRank={playerData.selectedRank} />
+              <MergeGet />
+            </div>
+            <div className="flex justify-center translate-y-3">
+              <RankSuitCountBig selectedRank={getNextRank(playerData.selectedRank)} />
+            </div>
           </div>
         </div>
       </PlayerDataContext.Provider>

@@ -2,6 +2,15 @@ import fs from "fs/promises"
 import path from "path"
 const dataPath = "./backend/data/"
 
+export const fileExists = async (filePath) => {
+  try {
+    await fs.access(filePath)
+    return true
+  } catch (error) {
+    return false
+  }
+}
+
 export const readFile = async (filePath) => {
   try {
     const rawData = await fs.readFile(filePath, "utf-8")
@@ -62,7 +71,11 @@ export const parseFile = async (filePath) => {
 
 export const findPlayerData = async (key) => {
   try {
-    const playerData = await parseFile(path.join(dataPath, `${key}.json`))
+    const filePath = path.join(dataPath, `${key}.json`)
+    const dataExists = await fileExists(filePath)
+    if (dataExists === false) return undefined 
+
+    const playerData = await parseFile(filePath)
 
     return playerData
   } catch (error) {

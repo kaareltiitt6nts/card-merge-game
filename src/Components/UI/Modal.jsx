@@ -9,7 +9,7 @@ const Modal = (props) => {
   const ModalDisplay = ({children}) => {
     return (
       <div className="bg-transparent fixed size-full flex justify-center items-center z-50">
-        <div className="fixed inset-0 bg-black/50"></div>
+        <div onClick={onClose} className="fixed inset-0 bg-black/50"></div>
         <Card>
           <button onClick={onClose} className="absolute size-6 right-1 top-1 hover:cursor-pointer"><img src={cross} alt="" /></button>
           <div>

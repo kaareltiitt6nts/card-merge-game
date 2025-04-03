@@ -14,7 +14,7 @@ const Navbar = () => {
   const [modal, setModal] = useState(null)
 
   return (
-    <div className="w-screen h-16 bg-green-950 flex justify-center gap-5">
+    <div className="sticky w-screen h-16 bg-green-950 flex justify-center gap-5">
       <NavButton icon={"src/assets/trophy.png"} onClick={() => setModal(modalStates.MODAL_HIGHSCORE)}/>
       <NavButton icon={"src/assets/gear.png"} onClick={() => setModal(modalStates.MODAL_SETTINGS)}/>
 

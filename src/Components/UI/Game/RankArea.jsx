@@ -8,7 +8,7 @@ const RankArea = () => {
   const ranks = Object.keys(playerData.cards)
 
   return (
-      <div className="absolute w-screen flex justify-center">
+      <div className="w-full flex justify-center">
         {ranks.map((rank, index) => (
           <RankButton
             key={rank}

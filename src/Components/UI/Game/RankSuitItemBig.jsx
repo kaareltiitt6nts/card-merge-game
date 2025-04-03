@@ -33,7 +33,7 @@ const RankSuitDisplay = (props) => {
   }, [count])
 
   return (
-    <div className={`w-32 h-32 flex flex-row justify-center items-center ${count > 0 ? "bg-white" : "bg-red-200"} rounded-md md:rounded-none md:rounded-t-md transition-transform duration-100 ease-linear ${translateClass}`}>
+    <div className={`w-32 h-32 flex flex-row justify-center items-center ${count > 0 ? "bg-white" : "bg-red-200"} border rounded-md md:rounded-none md:rounded-t-md transition-transform duration-100 ease-linear ${translateClass}`}>
       <div>
         <span className="text-2xl">{rank}</span>
         <span className="ml-2 text-xl">{suit}</span>

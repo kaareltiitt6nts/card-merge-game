@@ -7,9 +7,10 @@ const HighScore = () => {
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [playerName, setPlayerName] = useState(playerData.name || "");
   const [playerKey, setPlayerKey] = useState("")
-  
+
   return (
     <div className="text-center p-4">
+      <h3>Leaderboard</h3>
       <ul>
         {/* Siia tuleb dünaamiline andmete laadimine */}
         <li>#1 PlayerOne - 100pts</li>
